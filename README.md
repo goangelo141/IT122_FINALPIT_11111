@@ -1,1 +1,2 @@
-# IT122_FINALPIT_11111
+IT122 Program "Wordle"
+-Only includes 5-letter words from the Stanford GraphBase
