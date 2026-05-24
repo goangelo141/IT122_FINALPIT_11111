@@ -30,10 +30,27 @@ def display_word(secret_word, guess_word):
             print(f"{GRAY}{guess_word[i]}{RESET}", end=" ")
     print("")
 
-def main(): #Testing display_word function
-    secret_word = "PRUNE" 
-    guess_word = "DUNES"
-    display_word(secret_word, guess_word)
+def play_game(secret_word):
+    attempts = 6
+    while attempts > 0:
+        guess_word = input("Enter your 5-letter guess: ").upper()
+
+        if len(guess_word) != 5:
+            print("Please enter a valid 5-letter word.")
+            continue
+
+        display_word(secret_word, guess_word)
+
+        if guess_word == secret_word:
+            print("Congratulations! You've guessed the word!")
+            return
+        else:
+            attempts -= 1
+            print(f"Attempts remaining: {attempts}")
+
+def main(): 
+    secret_word = get_secret_word()
+    play_game(secret_word)
 
 if __name__ == "__main__":
     main()
