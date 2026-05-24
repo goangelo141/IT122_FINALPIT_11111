@@ -51,6 +51,7 @@ def play_game(secret_word):
 def main(): 
     secret_word = get_secret_word()
     play_game(secret_word)
+    print(f"The secret word was: {secret_word}")
 
 if __name__ == "__main__":
     main()
