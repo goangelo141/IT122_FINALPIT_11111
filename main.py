@@ -21,14 +21,31 @@ def display_word(secret_word, guess_word):
 
     print("Your guess result: ")
 
+    result = [""] * 5
+    used = [False] * 5
+
     for i in range(5):
         if guess_word[i] == secret_word[i]:
-            print(f"{GREEN}{guess_word[i]}{RESET}", end=" ")
-        elif guess_word[i] in secret_word:
-            print(f"{YELLOW}{guess_word[i]}{RESET}", end=" ")
+            result[i] = f"{GREEN}{guess_word[i]}{RESET}"
+            used[i] = True
         else:
-            print(f"{GRAY}{guess_word[i]}{RESET}", end=" ")
-    print("")
+            result[i] = None
+
+    for i in range(5):
+        if result[i] is None:
+            found = False
+            for j in range(5):
+                if not used[j] and guess_word[i] == secret_word[j]:
+                    found = True
+                    used[j] = True
+                    break
+            if found:
+                result[i] = f"{YELLOW}{guess_word[i]}{RESET}"
+            else:
+                result[i] = f"{GRAY}{guess_word[i]}{RESET}"
+
+    print("Your guess result: ")
+    print(" ".join(result))
 
 def play_game(secret_word):
     attempts = 6
@@ -50,8 +67,11 @@ def play_game(secret_word):
 
 def main(): 
     secret_word = get_secret_word()
-    play_game(secret_word)
-    print(f"The secret word was: {secret_word}")
+    if secret_word is not None:
+        play_game(secret_word)
+        print(f"The secret word was: {secret_word}")
+    else:
+        print("Game cannot start without a secret word.")
 
 if __name__ == "__main__":
     main()
