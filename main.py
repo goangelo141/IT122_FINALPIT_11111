@@ -44,7 +44,6 @@ def display_word(secret_word, guess_word):
             else:
                 result[i] = f"{GRAY}{guess_word[i]}{RESET}"
 
-    print("Your guess result: ")
     print(" ".join(result))
 
 def play_game(secret_word):
